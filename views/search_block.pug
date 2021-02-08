@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  main
+    div.container.mb-4.mt-4
+      div.row.mb-3
+        div.col
+          img.logo(src='/images/logo-black.svg')
+          h1 Armor block explorer
+      form#search
+        div.row
+          div.col
+            input#hash.form-control(type='text' name='hash' placeholder='Insert block or transaction hash' value=`${hash}`)
+          div.col-auto
+            button.btn.btn-primary(type='submit') Search
+
+  if result
+    div.container
+      div.row
+        div.col-6
+          h3 Found block:
+          div.card.p-3.bg-light.mb-2
+            div Hash: #{hash}
+          div.card.p-3.bg-light.mb-2
+            div Previous block hash:
+              a(href=`/search/${result.block.header.previous_block_hash}`) #{result.block.header.previous_block_hash}
+          div.card.p-3.bg-light.mb-2
+            div Reward: #{result.block.header.reward / 100000000} AMX
+          div.card.p-3.bg-light.mb-2
+            div Block size: #{result.block.header.block_size}
+          div.card.p-3.bg-light.mb-2
+            div Transactions size: #{result.block.header.transactions_size}
+          div.card.p-3.bg-light.mb-2
+            div Transactions fee: #{result.block.header.transactions_fee / 100000000} AMX
+          div.card.p-3.bg-light.mb-2
+            div Timestamp median: #{result.block.header.timestamp_median}
+        div.col-6
+          if result.block.transactions
+            h4 Transactions in block:
+            ul.list-group
+            each transaction in result.block.transactions
+              li.list-group-item.list-group-item-light
+                a.text-break(href=`/search/${transaction.hash}`) #{transaction.hash}

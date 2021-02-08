@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  main
+    div.container.mb-4.mt-4
+      div.row.mb-3
+        div.col
+          img.logo(src='/images/logo-black.svg')
+          h1 Armor block explorer
+      form#search
+        div.row
+          div.col
+            input#hash.form-control(type='text' name='hash' placeholder='Insert block or transaction hash' value=`${hash}`)
+          div.col-auto
+            button.btn.btn-primary(type='submit') Search
+
+  if result
+    div.container
+      div.row
+        div.col
+          h3 Found transaction:
+          div.card.p-3.bg-light.mb-2
+            div Hash: #{result.transaction.hash}
+          div.card.p-3.bg-light.mb-2
+            div Block hash:
+              a(href=`/search/${result.transaction.block_hash}`) #{result.transaction.block_hash}
+          div.card.p-3.bg-light.mb-2
+            div Amount: #{result.transaction.amount / 100000000} AMX
+          div.card.p-3.bg-light.mb-2
+            div Fee: #{result.transaction.fee / 100000000} AMX
+          div.card.p-3.bg-light.mb-2
+            div Anonymity: #{result.transaction.anonymity}
+          div.card.p-3.bg-light.mb-2
+            div Coinbase: #{result.transaction.coinbase}
+          div.card.p-3.bg-light.mb-2
+            div Timestamp: #{result.transaction.timestamp}
+          div.card.p-3.bg-light.mb-2
+            div Size: #{result.transaction.size} (binary size: #{result.transaction.binary_size})
