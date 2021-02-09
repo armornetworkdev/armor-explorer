@@ -1,0 +1,13 @@
+.logo {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 7px;
+    margin-right: 20px;
+}
+
+.logo + h1 {
+    display: inline-block;
+    vertical-align: middle;
+}

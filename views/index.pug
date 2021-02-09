@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  main
+    div.container.mb-4.mt-4
+      div.row.mb-3
+        div.col
+          img.logo(src='/images/logo-black.svg')
+          h1 Armor block explorer
+      form#search
+        div.row
+          div.col
+            input#hash.form-control(type='text' name='hash' placeholder='Insert block or transaction hash')
+          div.col-auto
+            button.btn.btn-primary(type='submit') Search
+
+    div.container
+      div.row
+        if status && status.result
+          div.col
+            h3 Network status
+            div.card.p-3.bg-light.mb-2
+              div Top block height: #{status.result.top_block_height} (known: #{status.result.top_known_block_height})
+            div.card.p-3.bg-light.mb-2
+              div Top block hash:
+                a(href=`/search/${status.result.top_block_hash}`) #{status.result.top_block_hash}
+            div.card.p-3.bg-light.mb-2
+              div Top block difficulty: #{status.result.top_block_difficulty}
+            div.card.p-3.bg-light.mb-2
+              div Total amount of coins: #{status.result.already_generated_coins / 100000000} AMX
+            div.card.p-3.bg-light.mb-2
+              div Top block timestamp: #{status.result.top_block_timestamp} (median: #{status.result.top_block_timestamp_median})
+        else if not_found
+          div.col
+            h4 Nothing found by provided hash.
+
+  script.
+    var form = document.getElementById('search');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var hash = document.getElementById('hash');
+      hash.value && (window.location.href='/search/'+hash.value);
+    });
