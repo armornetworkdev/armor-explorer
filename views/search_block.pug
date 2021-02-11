@@ -20,7 +20,9 @@ block content
         div.col-6
           h3 Found block:
           div.card.p-3.bg-light.mb-2
-            div Hash: #{result.block.hash}
+            div Block number: #{result.block.header.height}
+          div.card.p-3.bg-light.mb-2
+            div Hash: #{result.block.header.hash}
           div.card.p-3.bg-light.mb-2
             div Previous block hash:
               a(href=`/search/${result.block.header.previous_block_hash}`) #{result.block.header.previous_block_hash}
