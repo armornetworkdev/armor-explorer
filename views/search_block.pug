@@ -25,6 +25,14 @@ block content
           div.card.p-3.bg-light.mb-2
             div Hash: #{result.block.header.hash}
           div.card.p-3.bg-light.mb-2
+            div Status:&nbsp;
+              if result.orphan_status
+                span.badge.bg-danger Orphan
+              else if result.depth > -10
+                span.badge.bg-warning.text-dark Pending
+              else
+                span.badge.bg-success Valid
+          div.card.p-3.bg-light.mb-2
             div Previous block hash:
               a(href=`/search/${result.block.header.previous_block_hash}`) #{result.block.header.previous_block_hash}
           div.card.p-3.bg-light.mb-2
