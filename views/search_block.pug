@@ -41,7 +41,7 @@ block content
           div.card.p-3.bg-light.mb-2
             div Transactions fee: #{result.block.header.transactions_fee / 100000000} AMX
           div.card.p-3.bg-light.mb-2
-            div Timestamp median: #{result.block.header.timestamp_median}
+            div Timestamp: #{result.block.header.timestamp}
         div.col-6
           if result.block.transactions
             h4 Transactions in block:
