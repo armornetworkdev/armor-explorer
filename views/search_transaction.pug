@@ -5,12 +5,13 @@ block content
     div.container.mb-4.mt-4
       div.row.mb-3
         div.col
-          img.logo(src='/images/logo-black.svg')
-          h1 Armor block explorer
+          a(href=`/`)
+            img.logo(src='/images/logo-black.svg')
+            h1 Armor block explorer
       form#search
         div.row
           div.col
-            input#hash.form-control(type='text' name='hash' placeholder='Insert block or transaction hash' value=`${hash}`)
+            input#hash.form-control(type='text' name='hash' placeholder='Insert block or transaction hash, or positive block-number (height) or negative depth-number.' value=`${hash}`)
           div.col-auto
             button.btn.btn-primary(type='submit') Search
 
