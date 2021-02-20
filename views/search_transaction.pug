@@ -23,10 +23,16 @@ block content
           div.card.p-3.bg-light.mb-2
             div Hash: #{result.transaction.hash}
           div.card.p-3.bg-light.mb-2
-            div Block hash:
+            div Block hash: 
               a(href=`/search/${result.transaction.block_hash}`) #{result.transaction.block_hash}
           div.card.p-3.bg-light.mb-2
-            div Amount: #{result.transaction.amount / 100000000} AMX
+            div Amount: 
+              //-remove "//-" before span, and add "//-" to another span, to switch style of notification.
+              //-span #{result.transaction.amount / 100000000} AMX 
+                font.badge.bg-warning.text-dark It does not mean that this value is the amount that is actually transferred, it is a sum of outputs for this tx.
+              span.tooltip2 #{result.transaction.amount / 100000000} AMX
+                span.tooltiptext2
+                  font It does not mean that this value is the amount that is actually transferred, it is a sum of outputs for this tx.
           div.card.p-3.bg-light.mb-2
             div Fee: #{result.transaction.fee / 100000000} AMX
           div.card.p-3.bg-light.mb-2
@@ -38,10 +44,4 @@ block content
           div.card.p-3.bg-light.mb-2
             div Size: #{result.transaction.size} (binary size: #{result.transaction.binary_size})
 
-  script.
-    var form = document.getElementById('search');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var hash = document.getElementById('hash');
-      hash.value && (window.location.href='/search/'+hash.value);
-    });
+  script(src='/js/ScriptOnLoad.js')
