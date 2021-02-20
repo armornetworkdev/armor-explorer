@@ -42,32 +42,53 @@
 <script src="timestamp.js"></script>
 
 <script>
-	if(window.location.hash.split("search?q=").length > 1){
-		Search();
-	}else{
-		GetStatus();
+	//Fix incorrect URLs for search-requests:
+	if(window.location.href.indexOf('search') !== -1){			//if keyword "search" found in url
+		var request = window.location.href.split('search');		//split url by word "search", into array
+		request = request[request.length-1];					//and take last element, with search-request
+		while(													//if this beginning from 
+				request[0] === '/'								//	"/",
+			||	request[0] === '='								//	"=", 
+			||	request[0] === '?'								//	"?",
+			||	request[0] === '&'								//	"&"
+		){
+			request = request.substring(1, request.length);		//remove first char at beginning
+		}
+		while(request.substring(0, 3) === '?q='){				//if this beginning from "?q="
+			request = request.substring(3,request.length)			//remove "?q=" at baginning
+		}
+		if(window.location.origin+'#search?q='+request !== window.location.href)
+		{
+			window.location.href = (window.location.pathname)+'#search?q=' + request;	//then go to correct link.
+		}
 	}
-    var form = document.getElementById('search');
-    form.addEventListener('submit', function(e) {
+
+	if(window.location.hash.split("search?q=").length > 1){	//if search
+		Search();												//search
+	}else{													//else
+		GetStatus();											//index
+	}
+
+	//search after submit value from input.
+    var form = document.getElementById('search');		//take element
+    form.addEventListener('submit', function(e) {			//on submit
         e.preventDefault();
-        var hash = document.getElementById('hash');
-        hash.value && (window.location.href = (window.location.pathname)+'#search?q=' + hash.value);
-		Search();
+        var hash = document.getElementById('hash');			//take element with hash
+        hash.value && (window.location.href = (window.location.pathname)+'#search?q=' + hash.value);	//use value of this as hash.
+		Search();											//and search.
     });
-	
-	
-if ("onhashchange" in window) {
-	function locationHashChanged() {
-		if (location.hash === "") {
-			GetStatus();
+
+	if ("onhashchange" in window) {							//if window.location.hash changed
+		function locationHashChanged() {
+			if (location.hash === "") {						//if this empty
+				GetStatus();									//index, and get status
+			}
+			else if(location.hash.indexOf('#search?q=') !== -1){	//else if some value need to search
+				document.getElementById('hash').value = location.hash.split('#search?q=')[1];	//extract this value
+				Search();																		//and search this.
+			}
 		}
-		else if(location.hash.indexOf('#search?q=') !== -1){
-			document.getElementById('hash').value = location.hash.split('#search?q=')[1];
-			Search();
-		}
+		window.onhashchange = locationHashChanged;			//runn previous function, on change value in window.location.hash.
 	}
-	window.onhashchange = locationHashChanged;	
-}
-	
 </script>
 </html>
