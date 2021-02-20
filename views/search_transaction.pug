@@ -32,7 +32,7 @@ block content
                 font.badge.bg-warning.text-dark It does not mean that this value is the amount that is actually transferred, it is a sum of outputs for this tx.
               span.tooltip2 #{result.transaction.amount / 100000000} AMX
                 span.tooltiptext2
-                  font It does not mean that this value is the amount that is actually transferred, it is a sum of outputs for this tx.				
+                  font It does not mean that this value is the amount that is actually transferred, it is a sum of outputs for this tx.
           div.card.p-3.bg-light.mb-2
             div Fee: #{result.transaction.fee / 100000000} AMX
           div.card.p-3.bg-light.mb-2
@@ -44,10 +44,4 @@ block content
           div.card.p-3.bg-light.mb-2
             div Size: #{result.transaction.size} (binary size: #{result.transaction.binary_size})
 
-  script.
-    var form = document.getElementById('search');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var hash = document.getElementById('hash');
-      hash.value && (window.location.href='/search/'+hash.value);
-    });
+  script(src='/js/ScriptOnLoad.js')

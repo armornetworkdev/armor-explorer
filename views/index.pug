@@ -35,10 +35,4 @@ block content
           div.col
             h4 Nothing found by provided hash.
 
-  script.
-    var form = document.getElementById('search');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var hash = document.getElementById('hash');
-      hash.value && (window.location.href='/search/'+hash.value);
-    });
+  script(src='/js/ScriptOnLoad.js')

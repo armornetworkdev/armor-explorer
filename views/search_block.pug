@@ -53,10 +53,5 @@ block content
               li.list-group-item.list-group-item-light
                 a.text-break(href=`/search/${transaction.hash}`) #{transaction.hash}
 
-  script.
-    var form = document.getElementById('search');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var hash = document.getElementById('hash');
-      hash.value && (window.location.href='/search/'+hash.value);
-    });
+
+  script(src='/js/ScriptOnLoad.js')
