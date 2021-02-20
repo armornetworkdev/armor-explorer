@@ -140,7 +140,20 @@ function ShowTransaction(JSONTransaction){
 					'Block hash: '						+
 					'<a href="'+(window.location.pathname)+'#search?q='+response.result.transaction.block_hash+'">'+response.result.transaction.block_hash+'</a>'
 				)
-			,	('Amount: '								+		(response.result.transaction.amount / 100000000 ).toFixed(8)			+		' '+ CoinTicker					)
+			,	(
+						'Amount: '
+					+	'<span '
+//warning in title tooltip, on hover:
+					+		'class="tooltip2"'
+					+	'>'
+					+		(response.result.transaction.amount / 100000000 ).toFixed(8)			+		' '+ CoinTicker	//value, inside span
+//warning in title tooltip, on hover:
+					+		'<font class="tooltiptext2">It does not mean that this is the amount that is actually transferred, it\'s sum of outputs for this tx.</font>'
+
+//warning with text:
+//					+		' <font class="badge bg-warning text-dark">It does not mean that this is the amount that is actually transferred, it\'s sum of outputs for this tx.</font>'
+					+	'</span>'
+				)
 			,	('Fee: '								+		(response.result.transaction.fee  / 100000000 ).toFixed(8)				+		' '+ CoinTicker					)
 			,	('Anonymity: '							+		response.result.transaction.anonymity												)
 			,	('Coinbase: '							+		response.result.transaction.coinbase												)
