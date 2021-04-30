@@ -8,7 +8,12 @@ router.get('/:hash', async function (req, res, next) {
     let item;
     const {hash} = req.params;
     try {
-        item = await rpc('get_raw_block', {hash});
+        item = await rpc(
+            'get_raw_block', 
+                (hash.length === 64)            //if hash
+                    ? {hash}	                //get_raw_block by "block_hash" in first parameter. 
+                    : {"height_or_depth": hash}	//or get_raw_block by height_or_depth (positive "block_number" or negative "depth")
+        );
         if (item && item.result) {
             if (item.result.block && item.result.block.header.timestamp) {
                 item.result.block.header.timestamp = item.result.block.header.timestamp.toString() + ' - ' + timeDifference(item.result.block.header.timestamp);
