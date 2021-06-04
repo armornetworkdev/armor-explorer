@@ -4,7 +4,7 @@ function GetStatus(){
 	//get status
 	synchronousXmlHttpRequest(
 			get_status
-		,	PublicArmordRPC
+		,	PublicArmordRPCurl
 		,	'POST'
 		,	function(response){show_status(response);}	//and show this
 	);
