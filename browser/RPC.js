@@ -5,14 +5,21 @@ var PublicArmordRPC		= '127.0.0.1:58081';	//./armord --bytecoind-bind-address=0.
 //This arguments, not working: https://github.com/armornetworkdev/armor/blob/24872f0652e195f0c73dfc1754735afb0ea45d83/src/main_bytecoind.cpp#L36-L37 
 //Because of this, need to make something like --CORS=armorRPCExernalIP, here: https://github.com/armornetworkdev/armor/blob/24872f0652e195f0c73dfc1754735afb0ea45d83/src/Core/Config.cpp#L65
 
-var PublicArmordRPCurl	= 	'http://'	+(
+//	By default, armord RPC working over HTTP.
+var ArmordRPCProtocol			= 'http://';
+
+//	HTTTS-proxy (for example 'node-http-proxy'), can be used to host Armord RPC over HTTPS.
+//	This need to send XMLHttpRequests over HTTPS, when browser-version is available over HTTPS too, else XHR will be blocked by browser.
+//var ArmordRPCProtocol			= 'https://';	//uncomment this line, and comment previous, to use HTTPS protocol, for XHR.
+
+var PublicArmordRPCurl	= 	ArmordRPCProtocol	+(
 											(typeof HTTPCridentials !== 'undefined')	//if HTTPCridentials was defined
 												? HTTPCridentials + '@'		//use this in URL
 												: ''						//else skip
 										)
 										+PublicArmordRPC					//add IP:PORT
 										+'/json_rpc'						//and add his, to url
-;								//http://usr:pass@IP:PORT/json_rpc
+;	//http://usr:pass@IP:PORT/json_rpc
 
 var GETorPOST			= 'POST';
 //end config
@@ -40,7 +47,7 @@ function synchronousXmlHttpRequest(JSONRequest, URL, GETorPOST, callback, user, 
 /*
 synchronousXmlHttpRequest(
 	'{"jsonrpc": "2.0", "id": "0","method": "get_status"}',
-	'http://127.0.0.1:58081/json_rpc',
+	PublicArmordRPCurl,
 	'POST',
 	function(x){console.log(x);}	//callback function for response.
 );
@@ -70,7 +77,7 @@ function asynchronousXmlHttpRequest(JSONRequest, URL, GETorPOST) {
 /*
 asynchronousXmlHttpRequest(
 	'{"jsonrpc": "2.0", "id": "0","method": "get_status"}',
-	'http://127.0.0.1:58081/json_rpc',
+	PublicArmordRPCurl,
 	'POST'
 ).then(
 	function(res){
