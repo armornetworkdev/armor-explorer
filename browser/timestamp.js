@@ -1,10 +1,11 @@
-function timeDifference(previous, current = Date.now() / 1000) {
-    const sPerMinute = 60;
-    const sPerHour = sPerMinute * 60;
-    const sPerDay = sPerHour * 24;
-    const sPerMonth = sPerDay * 30;
-    const sPerYear = sPerDay * 365;
-    const elapsed = current - previous;
+function timeDifference(previous, current) {
+	сurrent = Date.now() / 1000;
+    var sPerMinute = 60;
+    var sPerHour = sPerMinute * 60;
+    var sPerDay = sPerHour * 24;
+    var sPerMonth = sPerDay * 30;
+    var sPerYear = sPerDay * 365;
+    var elapsed = current - previous;
 
     if (elapsed < sPerMinute) {
          return Math.round(elapsed) + ' seconds ago';
