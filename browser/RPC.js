@@ -50,8 +50,8 @@ synchronousXmlHttpRequest(
 function asynchronousXmlHttpRequest(JSONRequest, URL, GETorPOST) {
   GETorPOST = GETorPOST || 'POST';
   var xhr = new XMLHttpRequest();
-  return new Promise((resolve, reject) => {
-    xhr.onreadystatechange = (e) => {
+  return new Promise(function(resolve, reject){
+    xhr.onreadystatechange = function(e){
       if (xhr.readyState !== 4) {
         return;
       }
