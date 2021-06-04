@@ -4,7 +4,7 @@ function GetStatus(){
 	//get status
 	synchronousXmlHttpRequest(
 			get_status
-		,	'http://192.168.8.109:58081/json_rpc'
+		,	PublicArmordRPC
 		,	'POST'
 		,	function(response){show_status(response);}	//and show this
 	);
