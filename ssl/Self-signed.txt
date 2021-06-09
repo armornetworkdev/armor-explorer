@@ -1,0 +1,13 @@
+Generate self-signed ssl-key and ssl-cert
+
+In this folder, must to be ssl-key (localhost.key) and ssl-cert (localhost.cert).
+Different filenames can be used too,
+but then, change filenames in "armord-https-rpc-proxy.js" and "https.sh".
+
+Here is info, about generate the self-signed "ssl-key" and "ssl-cert" :
+https://github.com/username1565/cryptonote-nodejs-pool/blob/armor-nodejs-pool/ConfigureAndRunArmorPool.txt
+
+		Quote:
+Note1:
+    Here is the guide: https://gist.github.com/username1565/7321d63b44e1241f992c00d76b833c9a
+    and you can use "host", instead of "localhost", to get "host.key", "host.crt", "RootCA.crt".
