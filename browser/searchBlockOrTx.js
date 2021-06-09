@@ -3,7 +3,7 @@ function Search(){
 	//Try to search block
 	synchronousXmlHttpRequest(
 			get_raw_block(WhatToSearch)
-		,	'http://192.168.8.109:58081/json_rpc'
+		,	PublicArmordRPCurl
 		,	'POST'
 		,	function(blockresponse){
 				obj = JSON.parse(blockresponse);
@@ -33,7 +33,7 @@ function Search(){
 function SearchTransaction(TxHashToSearch){
 	synchronousXmlHttpRequest(
 			get_raw_transaction(TxHashToSearch)
-		,	'http://192.168.8.109:58081/json_rpc'
+		,	PublicArmordRPCurl
 		,	'POST'
 		,	function(txresponse){
 				ShowTransaction(txresponse);	//then show this block
